@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body> 
+
+        <ui:composition template="template/template.xhtml">
+
+            <ui:define name="content">
+                <div class="contentOfThePage"> 
+                    
+                    <h1>Bilderseite</h1>
+                    
+                    <h:form id="form" enctype="multipart/form-data">
+                        <h:inputFile id="file" value="#{websiteController.file}"/>
+                        <h:commandButton value="Upload"
+                                         action="#{websiteController.upload}"/>
+                        <h:selectOneRadio value="#{websiteController.data}">
+                            <f:selectItems value="#{websiteController.dirArray()}"/> 
+                        </h:selectOneRadio>   
+                        <h:inputText value="#{websiteController.DName}"/>
+                        <h:commandButton value="create Folder" 
+                                         action="#{websiteController.createDir()}" title="hi" />
+                    </h:form>
+                </div>
+                <div class="imagesDiv" >
+
+                </div>
+                <script type="text/javascript">//<![CDATA[
+                    // We don't want to disturb anything so we'll wait
+                    // until everything's done loading before preloading:
+                    window.onload = function () {
+                        preloadImagesFromDirectory('C://Work/images');
+                    }
+                    //]]></script>
+                <script type="text/javascript">//<![CDATA[
+                    /* JavaScript Component */
+
+                    function preloadImagesFromDirectory(dir) {
+
+                        if (!dir)
+                            return;
+
+                        function getJSON(URL, success) {
+
+                            // Create new function (within global namespace)
+                            // (With unique name):
+                            var uniqueID = 'json' + (+(new Date()));
+                            window[uniqueID] = function (data) {
+                                success && success(data);
+                            };
+
+                            // Append new SCRIPT element to DOM:
+                            document.getElementsByTagName('body')[0].appendChild((function () {
+                                var script = document.createElement('script');
+                                script.type = 'text/javascript';
+                                script.src = URL.replace('callback=?', 'callback=' + uniqueID);
+                                return script;
+                            })());
+
+                        }
+
+                        function preload(srcArray) {
+                            for (var i = 0; i < srcArray.length; i++) {
+                                (new Image()).src = srcArray[i];
+                            }
+                        }
+
+                        // Get that JSON data:
+                        getJSON('scanImageDirectory.php?directory=' + encodeURIComponent(dir) + '&callback=?', function (data) {
+                            return data.images ? preload(data.images) : false;
+                        });
+
+                    }
+                    //]]></script>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
