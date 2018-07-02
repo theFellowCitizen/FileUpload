@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,13 +37,13 @@ import javax.servlet.http.Part;
 public class WebsiteController implements Serializable {
 
     private Part file = null;
-    private String fileContent;
-    private String folder = "C:\\Work";
 
     private String data = "";
+    private String osName = System.getProperty("os.name").toLowerCase();
 
     private String dName = "";
-    private Path path = Paths.get("C:\\Work\\images")/*Paths.get("/home/anon/NetBeansProjects/MKDir/images")*/;
+    private Path pathWindows = Paths.get("C:\\Work\\images")/*Paths.get("/home/anon/NetBeansProjects/MKDir/images")*/;
+    private Path pathLinux = Paths.get("/home/images");
 
     /**
      * Creates a new instance of WebsiteController
@@ -55,19 +54,14 @@ public class WebsiteController implements Serializable {
 
     public void upload() {
         if (file != null) {
-            try {
-                setFileContent(new Scanner(file.getInputStream()).useDelimiter("\\A").next());
                 saveFile();
-            } catch (IOException e) {
-                // Error handling
-            }
         }
     }
 
     public void saveFile() {
 
         createDir();
-        String saveFolder = path + "\\" + this.data;
+        String saveFolder = pathWindows + "\\" + this.data;
         InputStream input = null;
         try {
             input = file.getInputStream();
@@ -114,20 +108,20 @@ public class WebsiteController implements Serializable {
 
     public void createDir() {
 
-        if (!Files.exists(Paths.get(path.toString() + "/animals"))
-                && !Files.exists(Paths.get(path.toString() + "/books"))
-                && !Files.exists(Paths.get(path.toString() + "/games"))) {
+        if (!Files.exists(Paths.get(pathWindows.toString() + "/animals"))
+                && !Files.exists(Paths.get(pathWindows.toString() + "/books"))
+                && !Files.exists(Paths.get(pathWindows.toString() + "/games"))) {
 
-            new File(path + "/animals").mkdirs();
-            new File(path + "/games").mkdirs();
-            new File(path + "/books").mkdirs();
+            new File(pathWindows + "/animals").mkdirs();
+            new File(pathWindows + "/games").mkdirs();
+            new File(pathWindows + "/books").mkdirs();
         }
 
         if (!dName.trim().equals("")) {
-            Path ownPath = Paths.get(path.getFileName() + "/" + dName);
+            Path ownPath = Paths.get(pathWindows.getFileName() + "/" + dName);
             if (!Files.exists(ownPath)) {
 //                ownPath.toFile().mkdir();
-                new File(path + "/" + dName).mkdir();
+                new File(pathWindows + "/" + dName).mkdir();
             }
         }
     }
@@ -149,12 +143,12 @@ public class WebsiteController implements Serializable {
     }
 
     public int listenDirectory() {
-        int i = new File(path.toString()).list().length;
+        int i = new File(pathWindows.toString()).list().length;
         return i;
     }
 
     public String[] dirArray() {
-        String[] i = new File(path.toString()).list();
+        String[] i = new File(pathWindows.toString()).list();
         return i;
     }
 
@@ -173,16 +167,16 @@ public class WebsiteController implements Serializable {
     }
 
     /**
-     * @return the fileContent
+     * @return the osName
      */
-    public String getFileContent() {
-        return fileContent;
+    public String getOsName() {
+        return osName;
     }
 
     /**
-     * @param fileContent the fileContent to set
+     * @param osName the osName to set
      */
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
+    public void setOsName(String osName) {
+        this.osName = osName;
     }
 }
