@@ -5,7 +5,6 @@ package controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
@@ -42,8 +41,8 @@ public class WebsiteController implements Serializable {
     private String osName = System.getProperty("os.name").toLowerCase();
 
     private String dName = "";
-    private Path pathWindows = Paths.get("C:\\Work\\images")/*Paths.get("/home/anon/NetBeansProjects/MKDir/images")*/;
-    private Path pathLinux = Paths.get("/home/images");
+    private final Path pathWindows = Paths.get("C:\\Work\\images");
+    private final Path pathLinux = Paths.get("/home/images");
 
     /**
      * Creates a new instance of WebsiteController
@@ -54,20 +53,30 @@ public class WebsiteController implements Serializable {
 
     public void upload() {
         if (file != null) {
-                saveFile();
+            saveFile();
         }
     }
 
     public void saveFile() {
 
         createDir();
-        String saveFolder = pathWindows + "\\" + this.data;
+        String saveFolder = null;
+        if (osName.contains("windows")) {
+            saveFolder = pathWindows + "\\" + this.data;
+        } else if (osName.contains("linux")) {
+            saveFolder = pathLinux + "/" + this.data;
+        }
         InputStream input = null;
         try {
             input = file.getInputStream();
             String fileName = file.getSubmittedFileName();
             Files.copy(input, new File(saveFolder, fileName).toPath());
-            addTextWatermark(fileName, file, new File(saveFolder + "\\" + "Watermarked" + fileName));
+            if (osName.contains("windows")) {
+                addTextWatermark(fileName, file, new File(saveFolder + "\\" + "Watermarked" + fileName));
+            } else if (osName.contains("linux")) {
+                addTextWatermark(fileName, file, new File(saveFolder + "/" + "Watermarked" + fileName));
+            }
+
             System.out.println(saveFolder + "/" + fileName);
         } catch (IOException ex) {
             Logger.getLogger(WebsiteController.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,22 +117,44 @@ public class WebsiteController implements Serializable {
 
     public void createDir() {
 
-        if (!Files.exists(Paths.get(pathWindows.toString() + "/animals"))
-                && !Files.exists(Paths.get(pathWindows.toString() + "/books"))
-                && !Files.exists(Paths.get(pathWindows.toString() + "/games"))) {
+        if (osName.contains("windows")) {
+            if (!Files.exists(Paths.get(pathWindows.toString() + "/animals"))
+                    && !Files.exists(Paths.get(pathWindows.toString() + "/books"))
+                    && !Files.exists(Paths.get(pathWindows.toString() + "/games"))) {
 
-            new File(pathWindows + "/animals").mkdirs();
-            new File(pathWindows + "/games").mkdirs();
-            new File(pathWindows + "/books").mkdirs();
-        }
+                new File(pathWindows + "/animals").mkdirs();
+                new File(pathWindows + "/games").mkdirs();
+                new File(pathWindows + "/books").mkdirs();
+            }
+        } else if (osName.contains("linux")) {
+            if (!Files.exists(Paths.get(pathLinux.toString() + "/animals"))
+                    && !Files.exists(Paths.get(pathLinux.toString() + "/books"))
+                    && !Files.exists(Paths.get(pathLinux.toString() + "/games"))) {
 
-        if (!dName.trim().equals("")) {
-            Path ownPath = Paths.get(pathWindows.getFileName() + "/" + dName);
-            if (!Files.exists(ownPath)) {
-//                ownPath.toFile().mkdir();
-                new File(pathWindows + "/" + dName).mkdir();
+                new File(pathLinux + "/animals").mkdirs();
+                new File(pathLinux + "/games").mkdirs();
+                new File(pathLinux + "/books").mkdirs();
             }
         }
+
+        if (osName.contains("windows")) {
+            if (!dName.trim().equals("")) {
+                Path ownPath = Paths.get(pathWindows.getFileName() + "/" + dName);
+                if (!Files.exists(ownPath)) {
+//                ownPath.toFile().mkdir();
+                    new File(pathWindows + "/" + dName).mkdir();
+                }
+            }
+        } else if (osName.contains("linux")) {
+            if (!dName.trim().equals("")) {
+                Path ownPath = Paths.get(pathLinux.getFileName() + "/" + dName);
+                if (!Files.exists(ownPath)) {
+//                ownPath.toFile().mkdir();
+                    new File(pathLinux + "/" + dName).mkdir();
+                }
+            }
+        }
+
     }
 
     public String getData() {
@@ -142,13 +173,14 @@ public class WebsiteController implements Serializable {
         this.file = file;
     }
 
-    public int listenDirectory() {
-        int i = new File(pathWindows.toString()).list().length;
-        return i;
-    }
-
     public String[] dirArray() {
-        String[] i = new File(pathWindows.toString()).list();
+        String[] i = null;
+        if (osName.contains("windows")) {
+            i = new File(pathWindows.toString()).list();
+        } else if (osName.contains("linux")) {
+            i = new File(pathWindows.toString()).list();
+        }
+        
         return i;
     }
 
