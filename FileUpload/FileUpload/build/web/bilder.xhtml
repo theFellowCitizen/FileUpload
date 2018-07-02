@@ -15,6 +15,7 @@
                     <h1>Bilderseite</h1>
                     
                     <h:form id="form" enctype="multipart/form-data">
+                        <h:outputLabel value="#{websiteController.osName}"/>
                         <h:inputFile id="file" value="#{websiteController.file}"/>
                         <h:commandButton value="Upload"
                                          action="#{websiteController.upload}"/>
@@ -29,7 +30,6 @@
                 <div class="imagesDiv" >
 
                 </div>
-
             </ui:define>
         </ui:composition>
     </body>

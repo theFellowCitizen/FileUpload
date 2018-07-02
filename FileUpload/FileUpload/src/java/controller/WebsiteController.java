@@ -39,12 +39,11 @@ public class WebsiteController implements Serializable {
 
     private String data = "";
     private String osName = System.getProperty("os.name").toLowerCase();
-    
-    private String test;
+    private String linuxHome = System.getProperty("user.home");
 
     private String dName = "";
     private final Path pathWindows = Paths.get("C:\\Work\\images");
-    private final Path pathLinux = Paths.get("/home/images");
+    private final Path pathLinux = Paths.get(linuxHome + "/images");
 
     /**
      * Creates a new instance of WebsiteController
@@ -182,7 +181,7 @@ public class WebsiteController implements Serializable {
         } else if (osName.contains("linux")) {
             i = new File(pathWindows.toString()).list();
         }
-        
+
         return i;
     }
 
