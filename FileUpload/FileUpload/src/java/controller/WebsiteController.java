@@ -39,6 +39,8 @@ public class WebsiteController implements Serializable {
 
     private String data = "";
     private String osName = System.getProperty("os.name").toLowerCase();
+    
+    private String test;
 
     private String dName = "";
     private final Path pathWindows = Paths.get("C:\\Work\\images");
