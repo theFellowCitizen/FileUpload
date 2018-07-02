@@ -6,6 +6,7 @@ body {
     height: 100%;
     margin: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff;
 }
 
 /*TOPNAV FOLLOWING*/
@@ -107,9 +108,17 @@ canvas {
     float:left;
     margin: 20px;
 }
+
 #button {
     bleed: 200px;
     font-family: initial;
+}
+
+#boxContainer {    
+    margin: 30px;
+    padding: 10px;
+    border: 1px;
+    border: solid black;
 }
 
 /*FOOTER FOLLOWING*/
