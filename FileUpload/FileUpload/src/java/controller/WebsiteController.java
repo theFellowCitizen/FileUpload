@@ -59,7 +59,6 @@ public class WebsiteController implements Serializable {
     }
 
     public void saveFile() {
-
         createDir();
         String saveFolder = null;
         if (osName.contains("windows")) {
@@ -77,8 +76,6 @@ public class WebsiteController implements Serializable {
             } else if (osName.contains("linux")) {
                 addTextWatermark(fileName, file, new File(saveFolder + "/" + "Watermarked" + fileName));
             }
-
-            System.out.println(saveFolder + "/" + fileName);
         } catch (IOException ex) {
             Logger.getLogger(WebsiteController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,7 +114,6 @@ public class WebsiteController implements Serializable {
     }
 
     public void createDir() {
-
         if (osName.contains("windows")) {
             if (!Files.exists(Paths.get(pathWindows.toString() + "/animals"))
                     && !Files.exists(Paths.get(pathWindows.toString() + "/books"))
@@ -158,6 +154,17 @@ public class WebsiteController implements Serializable {
 
     }
 
+    public String[] dirArray() {
+        String[] i = null;
+        if (osName.contains("windows")) {
+            i = new File(pathWindows.toString()).list();
+        } else if (osName.contains("linux")) {
+            i = new File(pathLinux.toString()).list();
+        }
+
+        return i;
+    }
+
     public String getData() {
         return data;
     }
@@ -172,17 +179,6 @@ public class WebsiteController implements Serializable {
 
     public void setFile(Part file) {
         this.file = file;
-    }
-
-    public String[] dirArray() {
-        String[] i = null;
-        if (osName.contains("windows")) {
-            i = new File(pathWindows.toString()).list();
-        } else if (osName.contains("linux")) {
-            i = new File(pathWindows.toString()).list();
-        }
-
-        return i;
     }
 
     /**
