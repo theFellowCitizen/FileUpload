@@ -114,11 +114,22 @@ canvas {
     font-family: initial;
 }
 
-#boxContainer {    
+.boxContainer {    
     margin: 30px;
     padding: 10px;
     border: 1px;
     border: solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+
+#login {
+    float: left;
+    display: inline-block;
+}
+
+#register {
+    float: right;
+    display: inline-block;
 }
 
 /*FOOTER FOLLOWING*/

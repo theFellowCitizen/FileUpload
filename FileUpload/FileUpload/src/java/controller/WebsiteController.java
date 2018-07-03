@@ -21,7 +21,6 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -55,15 +54,21 @@ public class WebsiteController implements Serializable {
 
     }
 
+    //the method to the upload accessed from xhtml
+    //file is the selected in the xhtml    
     public void upload() {
         if (file != null) {
             saveFile();
         }
     }
 
+    //first the folders are being created if they dont already exist
+    //obviously the upload won't happen if no folder is selected to begin with
     public void saveFile() {
         createDir();
         String saveFolder = null;
+        //first we will determine if the server runs linux or windows
+        //not to encounter any path
         if (osName.contains("windows")) {
             saveFolder = pathWindows + "\\" + this.data;
         } else if (osName.contains("linux")) {

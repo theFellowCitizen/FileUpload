@@ -8,14 +8,13 @@
     <body> 
 
         <ui:composition template="template/template.xhtml">
-
             <ui:define name="content">
                 <div class="contentOfThePage"> 
 
                     <h1>Bilderseite</h1>
 
                     <h:form id="form" enctype="multipart/form-data">
-                        <div id="boxContainer">
+                        <div class="boxContainer">
                             <h:inputFile id="file" value="#{websiteController.file}"/>
                             <h:commandButton value="Upload"
                                              action="#{websiteController.upload}"/>

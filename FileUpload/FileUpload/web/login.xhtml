@@ -15,26 +15,51 @@ and open the template in the editor.
     </head>
     <body>        
         <ui:composition template="template/template.xhtml">
-
             <ui:define name="content">
+                
                 <div class="contentOfThePage"> 
-                    <h:form>
-                        <div class="boxContainer">
-                            <table>
-                                <tr>
-                                    <td><h:outputLabel value="Username: "/></td>
-                                    <td><h:inputText value="#{websiteController.username}"/></td>
-                                </tr>
-                                <tr>
-                                    <td><h:outputLabel value="Password: "/></td>
-                                    <td><h:inputSecret value="#{websiteController.password}"/></td>
-                                </tr>
-                                <tr>
-                                    <td><h:commandButton value="Login" onclick="#{websiteController.login()}"/></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </h:form>
+                    <div id="login">
+                        <h:form>
+                            <div class="boxContainer">
+                                
+                                <h1>Login</h1>
+                                
+                                <table>
+                                    <tr>
+                                        <td><h:outputLabel value="Username: "/></td>
+                                        <td><h:inputText value="#{websiteController.username}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h:outputLabel value="Password: "/></td>
+                                        <td><h:inputSecret value="#{websiteController.password}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h:commandButton value="Login" onclick="#{websiteController.login()}"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="register">
+                                <div class="boxContainer">
+
+                                    <h1>Register</h1>
+
+                                    <table>
+                                        <tr>
+                                            <td><h:outputLabel value="Username: "/></td>
+                                            <td><h:inputText value="#{websiteController.username}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="Password: "/></td>
+                                            <td><h:inputSecret value="#{websiteController.password}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:commandButton value="Login" onclick="#{websiteController.login()}"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
             </ui:define>
         </ui:composition>
