@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -44,6 +45,10 @@ public class WebsiteController implements Serializable {
     private final Path pathWindows = Paths.get("C:\\Work\\images");
     private final Path pathLinux = Paths.get(linuxHome + "/images");
 
+    private String prename = "";
+    private String lastname = "";
+    private Date birthDate = null;
+    private String email = "";
     private String username = "";
     private String password = "";
  
@@ -219,6 +224,62 @@ public class WebsiteController implements Serializable {
      */
     public void setOsName(String osName) {
         this.osName = osName;
+    }
+
+    /**
+     * @return the prename
+     */
+    public String getPrename() {
+        return prename;
+    }
+
+    /**
+     * @param prename the prename to set
+     */
+    public void setPrename(String prename) {
+        this.prename = prename;
+    }
+
+    /**
+     * @return the lastname
+     */
+    public String getLastname() {
+        return lastname;
+    }
+
+    /**
+     * @param lastname the lastname to set
+     */
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    /**
+     * @return the birthDate
+     */
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * @param birthDate the birthDate to set
+     */
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
