@@ -114,7 +114,7 @@ canvas {
     font-family: initial;
 }
 
-#boxContainer {    
+.boxContainer {    
     margin: 30px;
     padding: 10px;
     border: 1px;

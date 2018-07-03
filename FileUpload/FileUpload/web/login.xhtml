@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>        
+        <ui:composition template="template/template.xhtml">
+
+            <ui:define name="content">
+                <div class="contentOfThePage"> 
+                    <h:form>
+                        <div class="boxContainer">
+                            <table>
+                                <tr>
+                                    <td><h:outputLabel value="Username: "/></td>
+                                    <td><h:inputText value="#{websiteController.username}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputLabel value="Password: "/></td>
+                                    <td><h:inputSecret value="#{websiteController.password}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><h:commandButton value="Login" onclick="#{websiteController.login()}"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

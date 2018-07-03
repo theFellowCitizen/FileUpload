@@ -45,6 +45,9 @@ public class WebsiteController implements Serializable {
     private final Path pathWindows = Paths.get("C:\\Work\\images");
     private final Path pathLinux = Paths.get(linuxHome + "/images");
 
+    private String username = "";
+    private String password = "";
+ 
     /**
      * Creates a new instance of WebsiteController
      */
@@ -164,6 +167,10 @@ public class WebsiteController implements Serializable {
 
         return i;
     }
+    
+    public void login(){
+        
+    }
 
     public String getData() {
         return data;
@@ -207,5 +214,33 @@ public class WebsiteController implements Serializable {
      */
     public void setOsName(String osName) {
         this.osName = osName;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
