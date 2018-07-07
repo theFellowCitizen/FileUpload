@@ -12,7 +12,9 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.inject.Named;
@@ -179,7 +181,17 @@ public class WebsiteController implements Serializable {
     }
     
     public void login(){
-        
+        try {
+            FileWriter fl = new FileWriter(pathLinux.toString()+"login.txt");
+            BufferedWriter bw = new BufferedWriter(fl);
+            bw.write(prename);
+            bw.append(lastname);
+            bw.append((CharSequence) birthDate);
+            bw.append(username);
+            bw.append(password);
+        } catch (IOException ex) {
+            Logger.getLogger(WebsiteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getData() {
